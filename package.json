@@ -1,0 +1,22 @@
+{
+  "name": "sector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beachdyl/sector.git"
+  },
+  "author": "Dylan Bowerman (@beachdyl)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beachdyl/sector/issues"
+  },
+  "homepage": "https://github.com/beachdyl/sector#readme",
+  "dependencies": {
+    "discord.js": "^13.3.1"
+  }
+}
