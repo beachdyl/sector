@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const func = require('../functions.js');
-const { adminUserId } = require('./config.json');
+const { adminUserId } = require('../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
