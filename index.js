@@ -66,7 +66,7 @@ client.on("messageCreate", message => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (func.isBanned(interaction.user.id)) {
-		interaction.reply({content: `You do not have permission to interact with me.`});
+		interaction.reply({ephemeral: true, content: `You do not have permission to interact with me.`});
 		return; // Don't process input from banned users
 	};
 	
