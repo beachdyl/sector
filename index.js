@@ -46,6 +46,8 @@ client.on("messageCreate", message => {
 		
 	};
 
+	message.reply({content: `I've processed your message. If you have the permissions, it will be posted under the name **${func.getNickname(message.author.id)}**.\nJust so you know, you can also run \`/message {your message}\` in the server. It's still anonymous.\n\n Your message was posted here: https://discord.com/channels/${guildId}/${channelId}`});
+
 	// Send embed with message
 	const messageEmbed = new MessageEmbed()
 		.setTitle(`Message from ${func.getNickname(message.author.id)}:`)
