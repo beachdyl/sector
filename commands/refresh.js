@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton } = require('discord.js');
+const { adminUserId } = require('./config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,8 +10,9 @@ module.exports = {
 	async execute(interaction) {
 
 		// Check executor. If not Dylan, do nothing.
-		if (`${interaction.user.id}` !== "200316185445793792") {
-			await interaction.reply({ephemeral: true, content: `You\'re not <@200316185445793792>, you\'re <@${interaction.user.id}>! You can\'t do that.`, components: [] });
+		if (`${interaction.user.id}` !== adminUserId) {
+			await interaction.reply({ephemeral: true, content: `You\'re not <@${adminUserId}>, you\'re <@${interaction.user.id}>! You can\'t do that.`, components: [] });
+			console.error(`<@${interaction.user.id}> (${interaction.user.name}) tried to run /refresh.`);
 		} else {
 			fs.unlinkSync('./files/Nicknames.txt');
 			fs.appendFileSync('./files/Nicknames.txt',`\n`);
