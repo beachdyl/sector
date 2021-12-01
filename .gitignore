@@ -5,5 +5,4 @@ config.json
 error.txt
 tempError.txt
 persistError.txt
-files/*
-files/Nicknames.txt
+files/
