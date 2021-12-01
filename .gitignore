@@ -5,5 +5,5 @@ config.json
 error.txt
 tempError.txt
 persistError.txt
-files/Nickname.txt
+files/Nicknames.txt
 files/Banned.txt

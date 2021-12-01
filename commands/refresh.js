@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton } = require('discord.js');
 
@@ -8,10 +9,10 @@ module.exports = {
 	async execute(interaction) {
 
 		// Check executor. If not Dylan, do nothing.
-		if (interaction.user.id !== 200316185445793792) {
-			await interaction.reply({ content: 'You\'re not <@200316185445793792>! You can\'t do that.', components: [] });
+		if (`${interaction.user.id}` !== "200316185445793792") {
+			await interaction.reply({ephemeral: true, content: `You\'re not <@200316185445793792>, you\'re <@${interaction.user.id}>! You can\'t do that.`, components: [] });
 		} else {
-			fs.unlinkSync('../files/Nicknames.txt');
+			fs.unlinkSync('./files/Nicknames.txt');
 			fs.appendFileSync('./files/Nicknames.txt',`\n`);
 			
 			await interaction.reply({ content: 'I have cleared all nicknames!', components: [] });
