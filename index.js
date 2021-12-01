@@ -3,7 +3,7 @@ const fs = require('fs');
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
 const { token, clientId, guildId, channelId, devChannelId } = require('./config.json');
 const errHandle = require('./errorHandler.js');
-const { matchWord, matchUsed, correctWord, wrongWord, deleteWord } = require('./functions.js');
+const func = require('./functions.js');
 
 // Try deleting old errorTemp.txt if it exists
 try {fs.unlinkSync('./errorTemp.txt');}
@@ -41,7 +41,17 @@ try {
 client.on("messageCreate", message => {
 	if (message.channel.type !== "DM") return; // Ignore messages sent outside dm
 
-	console.log(message.content);
+	if (message.content === "new") {
+		
+	};
+
+	// Send embed with message
+	const messageEmbed = new MessageEmbed()
+		.setColor(func.getColor(message.author.id))
+		.setTitle(`Message from ${func.getNickname(message.author.id)}:`)
+		//.setAuthor(func.getNickname(message.author.id))
+		.setDescription(message.content)
+	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
 });
 
 // Process slash command interactions
@@ -87,11 +97,11 @@ client.on('ready', () => {
 
 	// Send a good morning embed
 	const readyEmbed = new MessageEmbed()
-	.setColor('#00ff00')
-	.setTitle('Ready to rock and roll!')
-	//.setAuthor('Sector', 'https://i.ibb.co/cDrSdS5/PF-Flame.png', 'https://beachdyl.com')
-	.setDescription('I was asleep, but I am no longer asleep! To make a long story short, ~~I put a whole bag of jellybeans~~ **good morning**!')
-	.setTimestamp();
+		.setColor('#00ff00')
+		.setTitle('Ready to rock and roll!')
+		//.setAuthor('Sector', 'https://i.ibb.co/cDrSdS5/PF-Flame.png', 'https://beachdyl.com')
+		.setDescription('I was asleep, but I am no longer asleep! To make a long story short, ~~I put a whole bag of jellybeans~~ **good morning**!')
+		.setTimestamp();
 	client.channels.cache.get(devChannelId).send({embeds: [readyEmbed] });
 
 	// Check for persistent errors
