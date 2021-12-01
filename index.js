@@ -132,5 +132,20 @@ client.on('interactionCreate', interaction => {
 	} catch {}
 });
 
+// Check for unhandled errors on each interaction
+client.on('interactionCreate', interaction => {
+	let refDate = parseInt(fs.readFileSync('./files/Day.txt'), 10);
+	let d = new Date()
+	let nowDate = d.getDay()
+	if (refDate !== nowDate) {
+		fs.unlinkSync('./files/Nicknames.txt');
+		fs.appendFileSync('./files/Nicknames.txt',`\n`);
+
+		fs.writeFileSync('./files/Day.txt',`${nowDate}`)
+
+		console.log('Reset Nickname file for new date.')
+	}
+});
+
 // Login to Discord using the secret token
 client.login(token);
