@@ -11,10 +11,11 @@ catch (error) {}
 
 // Create a new client instance
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.DIRECT_MESSAGES],
+	partials: ["CHANNEL"],
 	presence: {
 		activity: {
-			type: "PLAYING", name: "with a dictionary"
+			type: "WATCHING", name: "people talk"
 		}
 	}
 });
@@ -38,43 +39,9 @@ try {
 
 // Process text messages
 client.on("messageCreate", message => {
-	if (channelId !== message.channel.id) return; // Only in the right channel
-	if (message.author.bot) return; // Ignore bots
+	if (message.channel.type !== "DM") return; // Ignore messages sent outside dm
 
-	// See if the word is in the dictionary
-	matchWord(message.content)
-	.then(val1 => {
-		switch (val1) {
-			case 1:
-				console.log(message.content+' is a word');
-
-				// Given that it is a word, see if the word has been used before
-				matchUsed(message.content)
-				.then(val2 => {
-					switch (val2) {
-						case 1:
-							console.log(message.content+' has been used');
-							wrongWord(message);
-							break;
-						case 0:
-							console.log(message.content+' has not been used');
-							correctWord(message);
-
-							break;
-						default:
-							errHandle(`Evaluation of whether or not ${message.content} has been used returned ${val}`, 1, client);
-					};
-				});
-
-				break;
-			case 0:
-				console.log(message.content+' is not a word');
-				deleteWord(message);
-				break;
-			default:
-				errHandle(`Evaluation of whether or not ${message.content} is a word returned ${val}`, 1, client);
-		};
-	});
+	console.log(message.content);
 });
 
 // Process slash command interactions
@@ -122,7 +89,7 @@ client.on('ready', () => {
 	const readyEmbed = new MessageEmbed()
 	.setColor('#00ff00')
 	.setTitle('Ready to rock and roll!')
-	//.setAuthor('Lingo', 'https://i.ibb.co/cDrSdS5/PF-Flame.png', 'https://beachdyl.com')
+	//.setAuthor('Sector', 'https://i.ibb.co/cDrSdS5/PF-Flame.png', 'https://beachdyl.com')
 	.setDescription('I was asleep, but I am no longer asleep! To make a long story short, ~~I put a whole bag of jellybeans~~ **good morning**!')
 	.setTimestamp();
 	client.channels.cache.get(devChannelId).send({embeds: [readyEmbed] });

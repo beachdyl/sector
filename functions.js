@@ -106,4 +106,11 @@ let wrongWord = async function(message) {
 	message.react('❌');
 };
 
+// Process when a correct and accepted word is said
+// let correctWord = async function(message) {
+// 	message.react('✅');
+// 	fs.appendFileSync('./files/Used.txt',`${message.content} ${message.author.id}\n`);
+// 	fs.writeFileSync(`./files/users/${message.author.id}.txt`,`${getScore(message.author.id)+1}`);
+// };
+
 module.exports = { matchWord, matchUsed, correctWord, deleteWord, wrongWord, whoSaid, getScore } ;
