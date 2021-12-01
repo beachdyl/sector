@@ -40,6 +40,7 @@ try {
 // Process text messages
 client.on("messageCreate", message => {
 	if (message.channel.type !== "DM") return; // Ignore messages sent outside dm
+	if (func.isBanned(message.author.id)) return; // Ignore all input from banned users
 
 	if (message.content === "new") {
 		

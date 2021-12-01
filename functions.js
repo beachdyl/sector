@@ -51,11 +51,12 @@ let getNickname =  function(userid) {
 		// If they don't have one, create a nickname and color for the user and return the name
 		let newName = getRandomWord();
 		let randColor = Math.floor(Math.random()*16777215).toString(16);
-		fs.appendFileSync('./files/Nicknames.txt',`${userid} ${newName} #${randColor} \n`);;
+		fs.appendFileSync('./files/Nicknames.txt',`${userid} ${newName} #${randColor} \n`);
 		return newName;
 	};
 };
 
+// Returns the color of a user
 let getColor =  function(userid) {
 	const regEx = new RegExp('\\b'+userid+'\\b', "i")
 	let result = [];
@@ -69,9 +70,6 @@ let getColor =  function(userid) {
 		};
 	});
 
-	console.log(result)
-	console.log(result.length)
-
 	if (result.length > 0) {
 		// If they exist, return the color of the user
 		result = result[0];
@@ -82,6 +80,27 @@ let getColor =  function(userid) {
 	} else {
 		// If they don't exist, return black
 		return `#000000`;
+	};
+};
+
+// Returns true if the user is banned from participating, otherwise false
+let isBanned =  function(userid) {
+	const regEx = new RegExp('\\b'+userid+'\\b', "i")
+	let result = [];
+
+	// Scan the file for the user
+	let file = fs.readFileSync('./files/Banned.txt', 'utf8');
+	let lines = file.split("\n");
+	lines.forEach(line => {
+		if (line && line.search(regEx) >= 0) {
+			result.push(line);
+		};
+	});
+
+	if (result.length > 0) {
+		return true;
+	} else {
+		return false;
 	};
 };
 
@@ -125,4 +144,4 @@ let whoSaid = async function(word) {
 // 	fs.writeFileSync(`./files/users/${message.author.id}.txt`,`${getScore(message.author.id)+1}`);
 // };
 
-module.exports = { matchWord, getRandomWord, whoSaid, getNickname, getColor } ;
+module.exports = { matchWord, getRandomWord, whoSaid, getNickname, getColor, isBanned } ;
