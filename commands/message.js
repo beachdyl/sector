@@ -13,6 +13,6 @@ module.exports = {
 		),
 	async execute(interaction) {
 		const section = interaction.options.getString('message');
-		await interaction.reply({ephemeral: true, content: `I've processed your message. If you have the permissions, it will be posted under the name **${func.getNickname(interaction.user.id)}**.`);
+		await interaction.reply({ephemeral: true, content: `I've processed your message. If you have the permissions, it will be posted under the name **${func.getNickname(interaction.user.id)}**.`});
 	},
 };

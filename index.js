@@ -58,6 +58,7 @@ client.on("messageCreate", message => {
 // Process slash command interactions
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+	if (func.isBanned(message.author.id)) return; // Ignore all input from banned users
 
 	const command = client.commands.get(interaction.commandName);
 
@@ -69,6 +70,17 @@ client.on('interactionCreate', async interaction => {
 		errHandle(`Requested restart`, 8, client)
 	}
 
+	// If interaction is message command, do things
+	if (interaction.commandName === 'message') {
+		const messageEmbed = new MessageEmbed()
+		.setColor(func.getColor(interaction.user.id))
+		.setTitle(`Message from ${func.getNickname(interaction.user.id)}:`)
+		//.setAuthor(func.getNickname(interaction.user.id))
+		.setDescription(interaction.options.getString('message'))
+	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
+	}
+
+	
 	try {
 		await command.execute(interaction);
 	} catch (error) {
