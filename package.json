@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/beachdyl/sector#readme",
   "dependencies": {
+    "@beachdyl/error_handler": "file:../error_handler",
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord.js": "^13.3.1"
   }

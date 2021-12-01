@@ -2,7 +2,7 @@
 const fs = require('fs');
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
 const { token, clientId, guildId, channelId, devChannelId } = require('./config.json');
-const errHandle = require('./errorHandler.js');
+const { errHandle } = require('@beachdyl/error_handler');
 const func = require('./functions.js');
 
 // Try deleting old errorTemp.txt if it exists

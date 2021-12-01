@@ -1,6 +1,6 @@
 // Require the necessary files and modules
 const fs = require('fs');
-const errHandle = require ('./errorHandler.js');
+const errHandle = require ('@beachdyl/error_handler');
 const { channelId } = require('./config.json');
 
 // getNickname function. Returns a string of the nickname of that user. If one doesn't exist, create it and then return that.
