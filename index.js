@@ -40,14 +40,17 @@ try {
 // Process text messages
 client.on("messageCreate", message => {
 	if (message.channel.type !== "DM") return; // Ignore messages sent outside dm
-	if (func.isBanned(message.author.id)) return; // Ignore all input from banned users
 	if (message.author.bot) return; // Ignore bot messages (namely itself)
-
+	if (func.isBanned(message.author.id)) {
+		message.reply({content: `You do not have permission to interact with me.`});
+		return; // Don't process input from banned users
+	};
+	
 	if (message.content === "new") {
 		
 	};
 
-	message.reply({content: `I've processed your message. If you have the permissions, it will be posted under the name **${func.getNickname(message.author.id)}**.\nJust so you know, you can also run \`/message {your message}\` in the server. It's still anonymous.\n\n Your message was posted here: https://discord.com/channels/${guildId}/${channelId}`});
+	message.reply({content: `I've processed your message. It will be posted under the name **${func.getNickname(message.author.id)}**.\nJust so you know, you can also run \`/message {your message}\` in the server. It's still anonymous.\n\n Your message was posted here: https://discord.com/channels/${guildId}/${channelId}`});
 
 	// Send embed with message
 	const messageEmbed = new MessageEmbed()
@@ -62,8 +65,11 @@ client.on("messageCreate", message => {
 // Process slash command interactions
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
-	if (func.isBanned(interaction.user.id)) return; // Ignore all input from banned users
-
+	if (func.isBanned(interaction.user.id)) {
+		interaction.reply({content: `You do not have permission to interact with me.`});
+		return; // Don't process input from banned users
+	};
+	
 	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
