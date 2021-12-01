@@ -41,6 +41,7 @@ try {
 client.on("messageCreate", message => {
 	if (message.channel.type !== "DM") return; // Ignore messages sent outside dm
 	if (func.isBanned(message.author.id)) return; // Ignore all input from banned users
+	if (message.author.bot) return; // Ignore bot messages (namely itself)
 
 	if (message.content === "new") {
 		
@@ -54,7 +55,7 @@ client.on("messageCreate", message => {
 		.setColor(func.getColor(message.author.id))
 		//.setAuthor(func.getNickname(message.author.id))
 		.setDescription(message.content)
-		.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
+		//.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
 	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
 });
 
@@ -80,7 +81,7 @@ client.on('interactionCreate', async interaction => {
 		.setColor(func.getColor(interaction.user.id))
 		//.setAuthor(func.getNickname(interaction.user.id))
 		.setDescription(interaction.options.getString('message'))
-		.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
+		//.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
 	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
 	}
 
