@@ -28,7 +28,6 @@ let getNickname =  function(userid) {
 		let newName = getRandomWord();
 		let randColor = Math.floor(Math.random()*16777215).toString(16);
 		fs.appendFileSync('./files/Nicknames.txt',`${userid} ${newName} #${randColor} \n`);
-		console.log(` yi ${newName} ht `)
 		return newName;
 	};
 };
@@ -113,8 +112,6 @@ let getRandomWord = function() {
 	var lines = file.split('\n');
 	var line = lines[Math.floor(Math.random()*lines.length)]
 	line = line.substring(0, line.length-1);
-
-	console.log(` yo ${line} hu `)
 
 	return line;
 };
