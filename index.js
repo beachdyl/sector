@@ -52,6 +52,7 @@ client.on("messageCreate", message => {
 		.setColor(func.getColor(message.author.id))
 		//.setAuthor(func.getNickname(message.author.id))
 		.setDescription(message.content)
+		.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
 	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
 });
 
@@ -77,6 +78,7 @@ client.on('interactionCreate', async interaction => {
 		.setColor(func.getColor(interaction.user.id))
 		//.setAuthor(func.getNickname(interaction.user.id))
 		.setDescription(interaction.options.getString('message'))
+		.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
 	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
 	}
 
@@ -112,7 +114,7 @@ client.on('ready', () => {
 	const readyEmbed = new MessageEmbed()
 		.setColor('#00ff00')
 		.setTitle('Ready to rock and roll!')
-		//.setAuthor('Sector', 'https://i.ibb.co/cDrSdS5/PF-Flame.png', 'https://beachdyl.com')
+		.setAuthor('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png', 'https://beachdyl.com')
 		.setDescription('I was asleep, but I am no longer asleep! To make a long story short, ~~I put a whole bag of jellybeans~~ **good morning**!')
 		.setTimestamp();
 	client.channels.cache.get(devChannelId).send({embeds: [readyEmbed] });
