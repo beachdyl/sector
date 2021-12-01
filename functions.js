@@ -34,7 +34,7 @@ let getNickname =  function(userid) {
 
 // getUserId function. Returns a string of the Discord ID of a user, given their nickname.
 let getUserId =  function(nickname) {
-	const regEx = new RegExp('\\b'+userid+'\\b', "i")
+	const regEx = new RegExp('\\b'+nickname+'\\b', "i")
 	let result = [];
 
 	// Scan the file for the user
