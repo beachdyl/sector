@@ -1,7 +1,6 @@
 // Require the necessary files and modules
 const fs = require('fs');
-const errHandle = require ('./errorHandler.js');
-const { channelId } = require('./config.json');
+const prependFile = require('prepend-file');
 
 // getNickname function. Returns a string of the nickname of that user. If one doesn't exist, create it and then return that.
 let getNickname =  function(userid) {
@@ -27,7 +26,7 @@ let getNickname =  function(userid) {
 		// If they don't have one, create a nickname and color for the user and return the name
 		let newName = getRandomWord();
 		let randColor = Math.floor(Math.random()*16777215).toString(16);
-		fs.appendFileSync('./files/Nicknames.txt',`${userid} ${newName} #${randColor} \n`);
+		prependFile.sync('./files/Nicknames.txt',`${userid} ${newName} #${randColor} \n`);
 		return newName;
 	};
 };
@@ -75,7 +74,7 @@ let getColor =  function(userid) {
 		// If they exist, return the color of the user
 		result = result[0];
 		result = result.substring(result.indexOf(" ")+1, result.length);
-		result = result.substring(result.indexOf(" ")+1, result.length);
+		result = result.substring(result.indexOf(" ")+1, result.indexOf(" "));
 
 		return result;
 	} else {
@@ -105,6 +104,15 @@ let isBanned =  function(userid) {
 	};
 };
 
+// Generates a new nickname for a user, deprioritizing old nickanmes, but leaving them in the file so they can be used for refernce (to ban, etc.)
+let newNickname =  function(userid) {
+	let newNick = getRandomWord();
+	let randColor = Math.floor(Math.random()*16777215).toString(16);
+	prependFile.sync('./files/Nicknames.txt',`${userid} ${newNick} #${randColor} \n`);
+
+	return newNick;
+};
+
 // Get a random word from the words file
 let getRandomWord = function() {
 	let file = fs.readFileSync('./files/US.txt', "utf-8")
@@ -117,4 +125,4 @@ let getRandomWord = function() {
 };
 
 
-module.exports = { getRandomWord, getNickname, getUserId, getColor, isBanned } ;
+module.exports = { getRandomWord, getNickname, getUserId, getColor, isBanned, newNickname } ;
