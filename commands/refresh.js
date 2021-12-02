@@ -6,7 +6,7 @@ const { adminUserId } = require('../config.json');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('refresh')
-		.setDescription('Removes all stored nicknames and colors!'),
+		.setDescription('Removes all stored nickname information'),
 	async execute(interaction) {
 
 		// Check executor. If not Dylan, do nothing.
