@@ -45,10 +45,6 @@ client.on("messageCreate", message => {
 		message.reply({content: `You do not have permission to interact with me.`});
 		return; // Don't process input from banned users
 	};
-	
-	if (message.content === "new") {
-		
-	};
 
 	message.reply({content: `I've processed your message. It will be posted under the name **${func.getNickname(message.author.id)}**.\nJust so you know, you can also run \`/message {your message}\` in the server. It's still anonymous.\n\n Your message was posted here: https://discord.com/channels/${guildId}/${channelId}`});
 
@@ -74,13 +70,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (!command) return;
 
-	// If interaction is restart command, do things
-	if (interaction.commandName === 'restart') {
-		client.user.setPresence({status: 'idle'});
-		errHandle(`Requested restart`, 8, client)
-	}
-
-	// If interaction is message command, do things
+	// If interaction is message command, process message
 	if (interaction.commandName === 'message') {
 		const messageEmbed = new MessageEmbed()
 		.setTitle(`Message from ${func.getNickname(interaction.user.id)}:`)
@@ -90,7 +80,6 @@ client.on('interactionCreate', async interaction => {
 		//.setFooter('Sector', 'https://i.ibb.co/BVKGkd9/gayliens.png')
 	client.channels.cache.get(channelId).send({embeds: [messageEmbed] });
 	}
-
 	
 	try {
 		await command.execute(interaction);
