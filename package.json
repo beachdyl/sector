@@ -18,6 +18,7 @@
   "homepage": "https://github.com/beachdyl/sector#readme",
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
-    "discord.js": "^13.3.1"
+    "discord.js": "^13.3.1",
+    "prepend-file": "^2.0.0"
   }
 }
